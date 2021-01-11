@@ -1,23 +1,26 @@
-n = int(input())
-n_list = [list(map(int,input().split())) for _ in range(n)]
-a,b,c,d = 0,0,0,0
-ck = [[0]*n for _ in range(n)]
-while True:
-    result = []
-    a += 1
-    result.append(a)
-    for i in range(1,n):
-        num = n_list[0][i] - a
-        result.append(num)
-    for i in range(n):
-        for j in range(n):
-            if i == j:
-                ck[i][j] = 0
-            else:
-                ck[i][j] = result[i]+result[j]
+from collections import deque
 
-    if ck == n_list:
-        break
+m,n = map(int,input().split())
+data = [list(map(int,input().split())) for _ in range(n)]
 
-for i in range(len(result)):
-    print(result[i], end=' ')
+dx,dy = [-1,1,0,0], [0,0,-1,1]
+q = deque()
+
+for i in range(n):
+    for j in range(m):
+        q.append((i,j))
+        data[i][j] = 0
+
+
+def bfs():
+    while q:
+        x,y = q.popleft()
+        for i in range(4):
+            nx,ny = x + dx[i], y + dy[i]
+            if  (0<=nx<n) and (0<=ny<m) and (data[nx][ny]) == 0:
+                data[nx][ny] = data[x][y] + 1
+                q.append((nx,ny))
+
+    return data
+
+print(bfs())
