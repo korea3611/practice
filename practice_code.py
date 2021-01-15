@@ -1,34 +1,27 @@
-import itertools
-
-def baseball_fun(x,y):
-    x = list(x); y = list(y)
-    s = 0; b = 0
-    for i in range(3):
-        if x[i] in y:
-            if y.index(x[i]) == i:
-                s += 1
-            else:
-                b += 1
-    return [s,b]
-
-def solution(baseball_list):
-    v = list(map(lambda x:str(x[0]), baseball_list))
-    r = list(map(lambda x: [x[1], x[2]], baseball_list))
-
-    all = list(itertools.permutations(range(1,10), 3))
-    all = list(map(lambda x: list(map(str, x)), all))
-
-    cnt = 0
-    for x in all:
-        if [baseball_fun(x,y) for y in v] == r:
-            cnt += 1
-
-    print(cnt)
-
 n = int(input())
-baseball_list = []
+li = []
+li2 = []
+dp = [0 for i in range(n)]
 for i in range(n):
-    a,b,c = map(int,input().split())
-    baseball_list.append([a,b,c])
+    x,y = map(int,input().split())
+    li.append((x,y))
+li.sort()
 
-solution(baseball_list)
+for i in range(len(li)):
+    li2.append(li[i][1])
+
+print(li2)
+dp[0] = 1
+
+for i in range(1,n):
+    a = 1
+    for j in range(i):
+        if li2[i] > li2[j]:
+            a = max(a, dp[j] + 1)
+    dp[i] = max(a, dp[i])
+
+print(n - max(dp))
+print(dp)
+
+
+
