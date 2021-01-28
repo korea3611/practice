@@ -10,3 +10,4 @@ for i in range(n):
         q.append(x)
 
 print(sum(q))
+
