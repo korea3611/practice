@@ -1,3 +1,1 @@
-s = input()
-
-print(s.isdigit())
+n = int(input())

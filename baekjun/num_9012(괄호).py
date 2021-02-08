@@ -21,4 +21,35 @@ for i in range(n):
                 print('NO')
                 break
 
+#### 내코드
+
+n = int(input())
+
+def check(data):
+    if data.count('(') == data.count(')'):
+        for i in data:
+            if i == ')':
+                if stack:
+                    a = stack.pop()
+                    if a == '(':
+                        pass
+                    else:
+                        return False
+                else:
+                    return False
+            else:
+                stack.append(i)
+        return True
+    else:
+        return False
+
+
+for _ in range(n):
+    data = list(input())
+    stack = []
+    if check(data):
+        print("YES")
+    else:
+        print("NO")
+
 
