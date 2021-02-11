@@ -3,7 +3,6 @@ vowels = ('a','e','i','o','u')
 l, c = map(int, input().split())
 array = input().split()
 array.sort()
-print(array)
 
 for password in combinations(array, l):
     count = 0
