@@ -1,51 +1,33 @@
-## 틀림 다시 제대로 풀어보자
-from collections import deque
-
 n,t,g = map(int,input().split())
-data = [0]*100000
-q = deque()
-q.append(n)
-data[7142] = 1
-cnt = 0
 
-def bfs():
-    global cnt
+def bfs(n,t,g):
+    q, visited = [n], {n}
+    step = 0
     while q:
-        cnt += 1
-        now = q.popleft()
-        if now == g:
-            return data[now]
-        for i in range(2):
-            if i == 0:
-                next = now+1
-                if data[next] != 0:
-                    if next > 99999:
-                        continue
-                    else:
-                        data[next] = data[now] + 1
-                        q.append(next)
-                else:
-                    continue
-            elif i == 1:
-                next = now * 2
-                if data[next] != 0:
-                    if next > 99999:
-                        continue
-                    else:
-                        next_list = list(str(next))
-                        next_list[0] = str(int(next_list[0])-1) if int(next_list[0])-1 > 0 else str(0)
-                        next = int("".join(next_list))
-                        data[next] = data[now] + 1
-                        q.append(next)
-                else:
-                    continue
-    return False
+        size = len(q)
 
-print(bfs())
+        for i in range(size):
+            cur = q.pop(0)
+            if cur == g:
+                return step
 
+            if cur * 2 > 99999:
+                next_move = [cur+1]
+            else:
+                m = list(str(cur*2))
+                m[0] = str(int(m[0])-1) if int(m[0])-1 > 0 else str(0)
+                m = int("".join(m))
+                next_move = [cur+1, m]
 
+            for j in next_move:
+                if j >= 0 and j <= 99999 and j not in visited:
+                    q.append(j)
+                    visited.add(j)
 
+        step += 1
 
+        if step > t:
+            break
+    return "ANG"
 
-
-
+print(bfs(n,t,g))
