@@ -1,44 +1,27 @@
 from itertools import permutations
+import math
 
-s = input()
-result = []
-result2 = []
-for i in range(1,len(s)+1):
-    a = permutations(s, i)
-    a = list(a)
-    result.append(a)
+def check(n):
+    k = math.sqrt(n)
+    if n < 2:
+        return False
 
-print(result)
+    for i in range(2, int(k)+1):
+        if n % i == 0:
+            return False
+    return True
 
-for i in result:
-    for j in i:
-        x = ''
-        for e in j:
-            # print(e)
-            x += e
-            print(x)
-        result2.append(x)
+def solution(numbers):
+    answer = []
+    for k in range(1, len(numbers) + 1):
+        perlist = list(map(''.join, permutations(list(numbers), k)))
+        print(perlist)
+        for i in list(set(perlist)):
+            print(int(i))
+            if check(int(i)):
+                answer.append(int(i))
 
-print(result2)
+    answer = len(set(answer))
 
-for i in result2:
-    if int(i) == 1:
-        result2.remove(i)
-    else:
-        for j in range(2,int(i)):
-            if int(i) % j == 0:
-                result2.remove(i)
+    return answer
 
-print(result2)
-
-
-
-
-
-
-
-# s = ('1','7')
-# ans = ''
-# for i in s:
-#     ans += i
-# print(ans)
