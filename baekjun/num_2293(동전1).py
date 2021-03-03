@@ -2,6 +2,7 @@
 n,k = map(int,input().split())
 c = [int(input()) for i in range(n)]
 dp = [0 for i in range(k+1)]
+print(dp)
 dp[0] = 1
 
 for i in c:
