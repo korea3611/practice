@@ -8,10 +8,8 @@ for i in s:
         stack.append(i)
     elif i == 'a':
         answer += len(stack)
-        print(answer)
     else:
         stack.pop()
         answer += 1
-        print(answer)
 
 print(answer)
