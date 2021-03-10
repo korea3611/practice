@@ -1,14 +1,32 @@
-data = [int(input()) for _ in range(9)]
+n = int(input())
+data = list(input().split())
+result = []
 
-for a in range(9):
-    for b in range(1,9):
-        for c in range(2,9):
-            for d in range(3,9):
-                for e in range(4,9):
-                    for f in range(5,9):
-                        for g in range(6,9):
-                            if data[a]+data[b]+data[c]+data[d]+data[e]+data[f]+data[g] == 100:
-                                a = [data[a],data[b],data[c],data[d],data[e],data[f],data[g]]
-                                for i in sorted(a):
-                                    print(i)
-                                exit(0)
+def ck(x, str):
+    if str(x) in str:
+        return False
+    return True
+
+def good(x,y,op):
+    if op == '<':
+        if x>y:
+            return False
+    if op == '>':
+        if x<y:
+            return False
+    return True
+
+def go(idx, str):
+    if idx == n+1:
+        result.append(str)
+        return True
+    for i in range(0,10):
+        if ck(i, str) == False:
+            continue
+        if idx == 0 or good(str[i-1], str[i], data[idx]):
+            go(idx+1, str+str[i])
+    return False
+
+go(0, '')
+print(result)
+

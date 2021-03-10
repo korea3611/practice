@@ -1,13 +1,13 @@
-from itertools import permutations
-
-n,m = map(int,input().split())
-data = [i for i in range(1,n+1)]
-data = list(permutations(data, m))
-
-for i in data:
-    for j in i:
-        print(j, end=' ')
-    print()
+# from itertools import permutations
+#
+# n,m = map(int,input().split())
+# data = [i for i in range(1,n+1)]
+# data = list(permutations(data, m))
+#
+# for i in data:
+#     for j in i:
+#         print(j, end=' ')
+#     print()
 
 ############
 
@@ -17,7 +17,7 @@ a = [0]*m
 
 def go(index, n, m):
     if index == m:
-        print(' '.join(map(str,a)) + '\n')
+        print(*a)
         return
     for i in range(1, n+1):
         if c[i]:
