@@ -1,4 +1,5 @@
 from collections import deque
+
 def path(x):
     arr = []
     temp = x
@@ -16,14 +17,14 @@ def bfs():
         if x == k:
             print(dist[x])
             path(x)
-            return
-        for i in (x-1,x+1,x*2):
-            if 0<=i<100001 and dist[i] == 0:
-                dist[i] = dist[x]+1
+            return x
+        for i in (x+1, x-1, x*2):
+            if 0 <= i < 100001 and dist[i] == 0:
                 q.append(i)
+                dist[i] = dist[x] + 1
                 move[i] = x
 
-n,k = map(int,input().split())
+n, k = map(int,input().split())
 dist = [0]*100001
 move = [0]*100001
 bfs()
